@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Aridai Ortega – Developer Portfolio</title>
+  <meta name="description" content="Developer portfolio of Aridai Ortega: web, backend, frontend, UX/UI, and research projects." />
+  <meta name="author" content="Aridai Ortega" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    :root{--bg:#0b0d12;--card:#121622;--muted:#9aa4b2;--primary:#6ea8fe;--text:#e6ebf3;--link:#c5d7ff;--link-hover:#9bb6ff}
+    [data-theme="light"]{--bg:#f7f8fb;--card:#ffffff;--muted:#5c6773;--primary:#2f64ff;--text:#111827;--link:#1d4ed8;--link-hover:#1739a6}
+    [data-theme="light"] .navbar{background:rgba(255,255,255,.8)}
+    [data-theme="light"] .card{border-color:rgba(0,0,0,.08)}
+    body{background:var(--bg); color:var(--text);} 
+    .navbar{background:rgba(18,22,34,.6); backdrop-filter: blur(8px);} .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden} .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;background:var(--primary);color:#0b0d12;padding:.5rem .75rem;border-radius:.5rem;z-index:10000}
+    /* motion & reveal */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease}
+    .reveal-visible{opacity:1; transform:none}
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important}
+      .reveal{transition:none}
+    }
+    :focus-visible{outline:2px solid var(--primary); outline-offset:2px}  
+    .brand-dot{color:var(--primary)}
+    .btn-brand{background:var(--primary); border:0; color:#0b0d12}
+    .btn-brand:hover{filter:brightness(1.05)}
+    .card{background:var(--card); border:1px solid rgba(255,255,255,.06)}
+    .muted{color:var(--muted)}
+    .badge-tech{background:#1b2236; border:1px solid rgba(255,255,255,.08)}
+    .avatar{width:112px;height:112px;border-radius:18px;object-fit:cover;border:2px solid rgba(255,255,255,.15)}
+    .shadow-soft{box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    a{color:var(--link)}
+    a:hover{color:var(--link-hover)}
+    .section{padding:6rem 0}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)}
+    /* timeline */
+    .timeline{position:relative;margin-left:1rem}
+    .timeline::before{content:"";position:absolute;left:0.5rem;top:0;bottom:0;width:2px;background:rgba(255,255,255,.1)}
+    .t-item{position:relative;padding-left:2rem;margin-bottom:1.5rem}
+    .t-item::before{content:"";position:absolute;left:-.1rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--primary)}
+    /* filter */
+    .filter-btn.active{background:var(--primary)!important;color:#0b0d12!important;border-color:transparent!important}
+      header#home{padding-top:8rem}
+      .card h3.h5, .card h3.h6, .card h5, .card .h5 { color: #e6ebf3 !important; }
+    .card p.muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <a href="#projects" class="skip-link">Skip to content</a>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top border-bottom border-opacity-10 border-light navbar-dark" data-bs-theme="dark">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="#home">Aridai Ortega<span class="brand-dot">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">UI Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="ms-lg-3 mt-3 mt-lg-0">
+          <button id="themeToggle" class="btn btn-outline-light btn-sm" aria-pressed="true" aria-label="Switch to light mode">
+            <i class="bi bi-sun"></i> <span class="d-none d-sm-inline">Light</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="section">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-md-7">
+          <h1 class="display-5 fw-bold">Developer focused on clean code, accessible UIs, and robust services.</h1>
+          <p class="lead muted mt-3">I build web applications end‑to‑end: API design, databases, and responsive interfaces with a keen eye for usability.</p>
+          <div class="d-flex gap-2 flex-wrap mt-4">
+            <a href="#projects" class="btn btn-brand btn-lg shadow-soft"><i class="bi bi-lightning-charge"></i> View Projects</a>
+            <a href="https://github.com/AridaiOrtegaZ" class="btn btn-outline-light btn-lg" target="_blank" rel="noreferrer"><i class="bi bi-github"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/aridaiortega-46b840236" class="btn btn-outline-light btn-lg" target="_blank" rel="noreferrer"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          </div>
+        </div>
+        <div class="col-md-5 text-md-end text-center">
+          <img src="assets/foto_Aridai.jpg" alt="Profile placeholder" class="avatar shadow-soft" />
+          <p class="muted small mt-2">Mexico City · English (Advanced) · Spanish (Native)</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="row justify-content-between g-4">
+        <div class="col-lg-7">
+          <h2 class="h3 fw-bold">About</h2>
+          <p class="muted">Bachelor's in Computer Technology and a master's in user‑centered interactive systems. I enjoy turning requirements into reliable software and intuitive experiences.</p>
+          <ul class="muted mb-0">
+            <li>Design to deployment: Git, CI/CD with GitHub Actions, Docker basics.</li>
+            <li>Solid grounding in HCI, usability, and technical documentation.</li>
+            <li>Comfortable across frontend, backend, and database integration.</li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <div class="card p-3 h-100">
+            <div class="card-body">
+              <h3 class="h5">Core tools</h3>
+              <p class="muted">JavaScript, Java, SQL, Python, HTML, CSS</p>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge rounded-pill badge-tech">React</span>
+                <span class="badge rounded-pill badge-tech">Node</span>
+                <span class="badge rounded-pill badge-tech">Angular</span>
+                <span class="badge rounded-pill badge-tech">PostgreSQL</span>
+                <span class="badge rounded-pill badge-tech">MySQL</span>
+                <span class="badge rounded-pill badge-tech">Bootstrap</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="h3 fw-bold mb-4">Selected Skills</h2>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card h-100 p-3">
+            <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-window fw-bold"></i><h3 class="h5 m-0">Frontend</h3></div>
+            <p class="muted mb-2">Responsive, accessible interfaces with Bootstrap and modern JS frameworks.</p>
+            <div class="d-flex flex-wrap gap-2 small">
+              <span class="badge rounded-pill badge-tech">React</span>
+              <span class="badge rounded-pill badge-tech">Angular</span>
+              <span class="badge rounded-pill badge-tech">Bootstrap</span>
+              <span class="badge rounded-pill badge-tech">Figma</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-3">
+            <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-diagram-3 fw-bold"></i><h3 class="h5 m-0">Backend</h3></div>
+            <p class="muted mb-2">RESTful APIs, authentication, and data modeling with relational databases.</p>
+            <div class="d-flex flex-wrap gap-2 small">
+              <span class="badge rounded-pill badge-tech">Node</span>
+              <span class="badge rounded-pill badge-tech">Java</span>
+              <span class="badge rounded-pill badge-tech">PostgreSQL</span>
+              <span class="badge rounded-pill badge-tech">MySQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-3">
+            <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-people fw-bold"></i><h3 class="h5 m-0">UX & Research</h3></div>
+            <p class="muted mb-2">User‑centered design, prototyping, and HCI research applied to real products.</p>
+            <div class="d-flex flex-wrap gap-2 small">
+              <span class="badge rounded-pill badge-tech">Usability</span>
+              <span class="badge rounded-pill badge-tech">Prototyping</span>
+              <span class="badge rounded-pill badge-tech">A/B Testing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- UI Gallery -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h3 fw-bold m-0">UI Gallery</h2>
+        <p class="muted m-0 small">Drop your Figma exports as images into <code>assets/</code> and update filenames below.</p>
+      </div>
+
+      <div id="figmaCarousel" class="carousel slide shadow-soft" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#figmaCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#figmaCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#figmaCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded-4">
+          <div class="carousel-item active">
+            <img src="assets/figma1.png" class="d-block w-100" alt="Figma screen 1">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/figma2.png" class="d-block w-100" alt="Figma screen 2">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/figma3.png" class="d-block w-100" alt="Figma screen 3">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#figmaCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#figmaCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h3 fw-bold m-0">Projects</h2>
+        <div class="btn-group" role="group" aria-label="Project filters">
+          <button class="btn btn-sm btn-outline-light filter-btn active" data-filter="all">All</button>
+          <button class="btn btn-sm btn-outline-light filter-btn" data-filter="frontend">Frontend</button>
+          <button class="btn btn-sm btn-outline-light filter-btn" data-filter="backend">Backend</button>
+          <button class="btn btn-sm btn-outline-light filter-btn" data-filter="ux">UX</button>
+          <button class="btn btn-sm btn-outline-light filter-btn" data-filter="research">Research</button>
+        </div>
+      </div>
+
+      <div class="row g-3" id="project-grid">
+        <!-- E‑commerce platform -->
+        <div class="col-md-6 project" data-tags="frontend backend">
+          <div class="card h-100 p-3">
+            <div class="card-body">
+              <h3 class="h5">E‑commerce Platform</h3>
+              <p class="muted">End‑to‑end app with React, Node.js, and PostgreSQL. Includes REST API for web, mobile, and desktop clients; CI with GitHub Actions.</p>
+              <div class="d-flex flex-wrap gap-2 small mb-3">
+                <span class="badge rounded-pill badge-tech">React</span>
+                <span class="badge rounded-pill badge-tech">Node</span>
+                <span class="badge rounded-pill badge-tech">PostgreSQL</span>
+                <span class="badge rounded-pill badge-tech">CI/CD</span>
+              </div>
+              <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noreferrer" class="btn btn-sm btn-outline-light">Source</a>
+            </div>
+          </div>
+        </div>
+        <!-- EXAVER module -->
+        <div class="col-md-6 project" data-tags="backend frontend">
+          <div class="card h-100 p-3">
+            <div class="card-body">
+              <h3 class="h5">EXAVER Exam Application Module</h3>
+              <p class="muted">Full module (frontend & backend) for managing exam applications, dynamic forms, assignments, and reports.</p>
+              <div class="d-flex flex-wrap gap-2 small mb-3">
+                <span class="badge rounded-pill badge-tech">CodeIgniter</span>
+                <span class="badge rounded-pill badge-tech">MySQL</span>
+                <span class="badge rounded-pill badge-tech">Bootstrap</span>
+              </div>
+              <a href="#" class="btn btn-sm btn-outline-light disabled" aria-disabled="true">Private</a>
+            </div>
+          </div>
+        </div>
+        <!-- Anonymous Info Website (Hackathon) -->
+        <div class="col-md-6 project" data-tags="frontend ux">
+          <div class="card h-100 p-3">
+            <div class="card-body">
+              <h3 class="h5">Anonymous Info Website (Hackathon)</h3>
+              <p class="muted">Competition project delivered in two days, focusing on anonymity, clarity, and rapid delivery.</p>
+              <div class="d-flex flex-wrap gap-2 small mb-3">
+                <span class="badge rounded-pill badge-tech">JS</span>
+                <span class="badge rounded-pill badge-tech">Bootstrap</span>
+                <span class="badge rounded-pill badge-tech">UX Writing</span>
+              </div>
+              <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noreferrer" class="btn btn-sm btn-outline-light">Sample Repo</a>
+            </div>
+          </div>
+        </div>
+        <!-- HCI Research with EEG -->
+        <div class="col-md-6 project" data-tags="research backend">
+          <div class="card h-100 p-3">
+            <div class="card-body">
+              <h3 class="h5">HCI Research: EEG for Learning Styles</h3>
+              <p class="muted">Research & ML in Python exploring EEG signals as features for online learning personalization.</p>
+              <div class="d-flex flex-wrap gap-2 small mb-3">
+                <span class="badge rounded-pill badge-tech">Python</span>
+                <span class="badge rounded-pill badge-tech">ML</span>
+                <span class="badge rounded-pill badge-tech">HCI</span>
+              </div>
+              <a href="#" class="btn btn-sm btn-outline-light disabled" aria-disabled="true">Publication</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="muted mt-3">More on <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noreferrer">github.com/AridaiOrtegaZ</a>.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Experience -->
+  <section id="experience" class="section">
+    <div class="container">
+      <h2 class="h3 fw-bold mb-4">Experience</h2>
+      <div class="row g-3">
+        <div class="col-lg-6">
+          <div class="card p-3 h-100">
+            <div class="timeline">
+              <div class="t-item">
+                <h3 class="h6 m-0">UX Developer – Ministry of Economy & Finance (Peru)</h3>
+                <small class="muted">2025 · SIAF‑RP Government App</small>
+                <p class="mt-2 muted">Designed and implemented UI flows, interaction patterns, and accessibility improvements for the national SIAF‑RP platform used by public institutions. Delivered responsive layouts, reusable components, and UX documentation aligned with WCAG guidelines.</p>
+              </div>
+              <div class="t-item">
+                <h3 class="h6 m-0">UX/UI Developer – ND (Negocios Digitales)</h3>
+                <small class="muted">2025 · SIAF‑RP (Ministry of Economy & Finance, Peru)</small>
+                <p class="mt-2 muted">Turned requirements into accessible interfaces, aligning design and code to improve navigation, performance, and satisfaction.</p>
+              </div>
+              <div class="t-item">
+                <h3 class="h6 m-0">Freelance Developer</h3>
+                <small class="muted">2023–2025</small>
+                <p class="mt-2 muted">Built and shipped an e‑commerce platform, implemented REST APIs, and automated workflows with GitHub Actions.</p>
+              </div>
+              <div class="t-item">
+                <h3 class="h6 m-0">Practices – Facultad de Estadística e Informática</h3>
+                <small class="muted">2022–2023</small>
+                <p class="mt-2 muted">Automation tools for administrative processes across mobile and desktop, including AI components.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card p-3 h-100">
+            <h3 class="h5">Education & Certifications</h3>
+            <ul class="muted mb-0">
+              <li>Master's: User‑Centered Interactive Systems (2023–2025)</li>
+              <li>Bachelor's: Computer Technology (2019–2023)</li>
+              <li>TOEFL ITP & EXAVER English, Azure AZ‑900, GitHub Actions CI/CD</li>
+              <li>Hackathons: Coding4Integrity (São Paulo), ANIEI Mexico – 3rd place</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-8">
+          <h2 class="h3 fw-bold">Let's build something useful.</h2>
+          <p class="muted">Open to collaboration on web apps, APIs, and UX‑driven products.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-brand" href="mailto:aridaiortega@hotmail.com"><i class="bi bi-envelope"></i> Email</a>
+            <a class="btn btn-outline-light" href="https://www.linkedin.com/in/aridaiortega-46b840236" target="_blank" rel="noreferrer"><i class="bi bi-linkedin"></i> LinkedIn</a>
+            <a class="btn btn-outline-light" href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noreferrer"><i class="bi bi-github"></i> GitHub</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <div class="card-body">
+              <h3 class="h6">Quick facts</h3>
+              <ul class="muted small mb-0">
+                <li>Based in Mexico City</li>
+                <li>Spanish / English</li>
+                <li>Available for remote or on‑site work</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4 border-top border-opacity-10 border-light">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <small class="muted">© <span id="year"></span> Aridai Ortega</small>
+      <a href="#home" class="muted small">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle with prefers-color-scheme + localStorage
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if(saved){ root.dataset.theme = saved; }
+    else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){ root.dataset.theme = 'light'; }
+    const btn = document.getElementById('themeToggle');
+    function updateBtn(){
+      const light = root.dataset.theme === 'light';
+      btn.classList.toggle('btn-outline-light', !light);
+      btn.classList.toggle('btn-outline-dark', light);
+      btn.setAttribute('aria-pressed', light ? 'false' : 'true');
+      btn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+      btn.innerHTML = light ? '<i class="bi bi-moon"></i> <span class="d-none d-sm-inline">Dark</span>' : '<i class="bi bi-sun"></i> <span class="d-none d-sm-inline">Light</span>';
+    }
+    if(btn){ updateBtn(); btn.addEventListener('click', ()=>{ root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light'; localStorage.setItem('theme', root.dataset.theme); updateBtn(); }); }
+
+    // Reveal on scroll
+    const revealables = [];
+    document.querySelectorAll('.card, .section h2, .project, .timeline .t-item').forEach(el=>{ el.classList.add('reveal'); revealables.push(el); });
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('reveal-visible'); io.unobserve(entry.target);} });
+    },{threshold:0.12});
+    revealables.forEach(el=>io.observe(el));
+
+    // Simple project filtering
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project');
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.filter;
+      cards.forEach(c => {
+        const visible = tag==='all' || c.dataset.tags.includes(tag);
+        c.style.display = visible ? '' : 'none';
+      });
+    }));
+
+    // Smooth scroll (native behavior enhanced for older browsers)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
+  </script>
+</body>
+</html>
