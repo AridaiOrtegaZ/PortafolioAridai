@@ -46,6 +46,33 @@
       header#home{padding-top:8rem}
       .card h3.h5, .card h3.h6, .card h5, .card .h5 { color: #e6ebf3 !important; }
     .card p.muted { color: var(--muted); }
+    /* Carrusel con altura fija */
+#figmaCarousel .carousel-inner{
+  height: 420px;            /* ajusta a tu gusto */
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Asegura que item y la img ocupen toda la altura */
+#figmaCarousel .carousel-item{
+  height: 100%;
+}
+
+/* Mostrar imagen completa sin recorte */
+#figmaCarousel .carousel-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* <-- clave: no recorta */
+  object-position: center;
+  background: #0b0d12;      /* relleno para las “barras” */
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px){
+  #figmaCarousel .carousel-inner{ height: 260px; }
+}
+
   </style>
 </head>
 <body>
