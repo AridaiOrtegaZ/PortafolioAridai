@@ -16,6 +16,14 @@
     [data-theme="light"]{--bg:#f7f8fb;--card:#ffffff;--muted:#5c6773;--primary:#2f64ff;--text:#111827;--link:#1d4ed8;--link-hover:#1739a6}
     [data-theme="light"] .navbar{background:rgba(255,255,255,.8)}
     [data-theme="light"] .card{border-color:rgba(0,0,0,.08)}
+    [data-theme="light"] .btn-outline-light{
+  color: var(--text) !important;
+  border-color: rgba(0,0,0,.25) !important;
+}
+
+[data-theme="light"] .btn-outline-light:hover{
+  background: rgba(0,0,0,.06) !important;
+}
     body{background:var(--bg); color:var(--text);} 
     .navbar{background:rgba(18,22,34,.6); backdrop-filter: blur(8px);} .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden} .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;background:var(--primary);color:#0b0d12;padding:.5rem .75rem;border-radius:.5rem;z-index:10000}
     /* motion & reveal */
@@ -32,6 +40,11 @@
     .card{background:var(--card); border:1px solid rgba(255,255,255,.06)}
     .muted{color:var(--muted)}
     .badge-tech{background:#1b2236; border:1px solid rgba(255,255,255,.08)}
+    [data-theme="light"] .badge-tech{
+  background: rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.12);
+  color: var(--text);
+}
     .avatar{width:112px;height:112px;border-radius:18px;object-fit:cover;border:2px solid rgba(255,255,255,.15)}
     .shadow-soft{box-shadow:0 10px 30px rgba(0,0,0,.35)}
     a{color:var(--link)}
@@ -46,7 +59,7 @@
     /* filter */
     .filter-btn.active{background:var(--primary)!important;color:#0b0d12!important;border-color:transparent!important}
       header#home{padding-top:8rem}
-      .card h3.h5, .card h3.h6, .card h5, .card .h5 { color: #e6ebf3 !important; }
+      .card h3.h5, .card h3.h6, .card h5, .card .h5 { color: var(--text); }
     .card p.muted { color: var(--muted); }
     /* Carrusel con altura fija */
 #figmaCarousel .carousel-inner{
@@ -74,6 +87,30 @@
 @media (max-width: 768px){
   #figmaCarousel .carousel-inner{ height: 260px; }
 }
+/* FIX navbar en light mode (sin tocar JS) */
+[data-theme="light"] .navbar{
+  background: rgba(255,255,255,.9) !important;
+  border-bottom-color: rgba(0,0,0,.12) !important;
+}
+
+[data-theme="light"] .navbar .navbar-brand,
+[data-theme="light"] .navbar .nav-link{
+  color: #111827 !important;
+}
+
+[data-theme="light"] .navbar .nav-link:hover,
+[data-theme="light"] .navbar .nav-link:focus{
+  color: #1d4ed8 !important;
+}
+
+/* icono del menu hamburguesa en mobile */
+[data-theme="light"] .navbar .navbar-toggler{
+  border-color: rgba(0,0,0,.2) !important;
+}
+[data-theme="light"] .navbar .navbar-toggler-icon{
+  filter: invert(1) grayscale(1);
+}
+
 
   </style>
 </head>
@@ -88,18 +125,23 @@
       </button>
       <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gallery">UI Gallery</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" data-i18n="nav.about" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills" data-i18n="nav.skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery" data-i18n="nav.gallery">UI Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects"  data-i18n="nav.projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience" data-i18n="nav.experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
-        <div class="ms-lg-3 mt-3 mt-lg-0">
-          <button id="themeToggle" class="btn btn-outline-light btn-sm" aria-pressed="true" aria-label="Switch to light mode">
-            <i class="bi bi-sun"></i> <span class="d-none d-sm-inline">Light</span>
-          </button>
-        </div>
+        <div class="ms-lg-3 mt-3 mt-lg-0 d-flex gap-2">
+  <button id="langToggle" class="btn btn-outline-light btn-sm" aria-pressed="false" aria-label="Switch language">
+    ES
+  </button>
+
+  <button id="themeToggle" class="btn btn-outline-light btn-sm" aria-pressed="true" aria-label="Switch to light mode">
+    <i class="bi bi-sun"></i> <span class="d-none d-sm-inline">Light</span>
+  </button>
+</div>
+
       </div>
     </div>
   </nav>
@@ -109,17 +151,28 @@
     <div class="container">
       <div class="row align-items-center g-4">
         <div class="col-md-7">
-          <h1 class="display-5 fw-bold">Developer focused on clean code, accessible UIs, and robust services.</h1>
-          <p class="lead muted mt-3">I build web applications end‑to‑end: API design, databases, and responsive interfaces with a keen eye for usability.</p>
+          <h1 class="display-5 fw-bold" data-i18n="hero.title">Developer focused on clean code, accessible UIs, and robust services.</h1>
+          <p class="lead muted mt-3" data-i18n="hero.subtitle">I build web applications end‑to‑end: API design, databases, and responsive interfaces with a keen eye for usability.</p>
           <div class="d-flex gap-2 flex-wrap mt-4">
-            <a href="#projects" class="btn btn-brand btn-lg shadow-soft"><i class="bi bi-lightning-charge"></i> View Projects</a>
-            <a href="https://github.com/AridaiOrtegaZ" class="btn btn-outline-light btn-lg" target="_blank" rel="noreferrer"><i class="bi bi-github"></i> GitHub</a>
-            <a href="https://www.linkedin.com/in/aridaiortega-46b840236" class="btn btn-outline-light btn-lg" target="_blank" rel="noreferrer"><i class="bi bi-linkedin"></i> LinkedIn</a>
+            <a href="#projects" class="btn btn-brand btn-lg shadow-soft"><i class="bi bi-lightning-charge"></i> <span data-i18n="hero.ctaProjects">View Projects</span></a>
+            <a href="https://github.com/AridaiOrtegaZ" class="btn btn-outline-light btn-lg" target="_blank" rel="noreferrer"><i class="bi bi-github"></i><span data-i18n="hero.ctaGithub">GitHub</span></a>
+            <a href="https://www.linkedin.com/in/aridai-ortega-46b840236/"
+   class="btn btn-outline-light btn-lg"
+   target="_blank"
+   rel="noopener noreferrer">
+  <i class="bi bi-linkedin"></i> <span data-i18n="hero.ctaLinkedin">LinkedIn</span>
+</a>
+          <a id="cvBtn" href="assets/CV_AridaiOrtega_ENG (2).pdf" class="btn btn-outline-light btn-lg" download>
+  <i class="bi bi-file-earmark-arrow-down"></i>
+  <span data-i18n="hero.ctaCv">Download CV</span>
+</a>
+
+
           </div>
         </div>
         <div class="col-md-5 text-md-end text-center">
           <img src="assets/foto_Aridai.jpg" alt="Profile placeholder" class="avatar shadow-soft" />
-          <p class="muted small mt-2">Mexico City · English (Advanced) · Spanish (Native)</p>
+          <p class="muted small mt-2" data-i18n="hero.meta">Mexico City · English (Advanced) · Spanish (Native)</p>
         </div>
       </div>
     </div>
@@ -132,23 +185,25 @@
     <div class="container">
       <div class="row justify-content-between g-4">
         <div class="col-lg-7">
-          <h2 class="h3 fw-bold">About</h2>
-          <p class="muted">Bachelor's in Computer Technology and a master's in user‑centered interactive systems. I enjoy turning requirements into reliable software and intuitive experiences.</p>
+          <h2 class="h3 fw-bold" data-i18n="about.title">About</h2>
+          <p class="muted" data-i18n="about.description">Bachelor's in Computer Technology and a master's in user‑centered interactive systems. I enjoy turning requirements into reliable software and intuitive experiences.</p>
           <ul class="muted mb-0">
-            <li>Design to deployment: Git, CI/CD with GitHub Actions, Docker basics.</li>
-            <li>Solid grounding in HCI, usability, and technical documentation.</li>
-            <li>Comfortable across frontend, backend, and database integration.</li>
+            <li data-i18n="about.li1">Design to deployment: Git, CI/CD with GitHub Actions, Docker basics.</li>
+            <li data-i18n="about.li2">Solid grounding in HCI, usability, and technical documentation.</li>
+            <li data-i18n="about.li3">Comfortable across frontend, backend, and database integration.</li>
           </ul>
         </div>
         <div class="col-lg-4">
           <div class="card p-3 h-100">
             <div class="card-body">
-              <h3 class="h5">Core tools</h3>
-              <p class="muted">JavaScript, Java, SQL, Python, HTML, CSS</p>
+              <h3 class="h5" data-i18n="about.toolsTitle">Core tools</h3>
+              <p class="muted" >JavaScript, Java, SQL, Python, HTML, CSS</p>
               <div class="d-flex flex-wrap gap-2">
                 <span class="badge rounded-pill badge-tech">React</span>
+                <span class="badge rounded-pill badge-tech">Angular</span>
                 <span class="badge rounded-pill badge-tech">Node</span>
                 <span class="badge rounded-pill badge-tech">Angular</span>
+                <span class="badge rounded-pill badge-tech">SpringBoot</span>
                 <span class="badge rounded-pill badge-tech">PostgreSQL</span>
                 <span class="badge rounded-pill badge-tech">MySQL</span>
                 <span class="badge rounded-pill badge-tech">Bootstrap</span>
@@ -165,12 +220,12 @@
   <!-- Skills -->
   <section id="skills" class="section">
     <div class="container">
-      <h2 class="h3 fw-bold mb-4">Selected Skills</h2>
+      <h2 class="h3 fw-bold mb-4" data-i18n="skills.title">Selected Skills</h2>
       <div class="row g-3">
         <div class="col-md-4">
           <div class="card h-100 p-3">
             <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-window fw-bold"></i><h3 class="h5 m-0">Frontend</h3></div>
-            <p class="muted mb-2">Responsive, accessible interfaces with Bootstrap and modern JS frameworks.</p>
+            <p class="muted mb-2" data-i18n="skills.frontend.desc">Responsive, accessible interfaces with Bootstrap and modern JS frameworks.</p>
             <div class="d-flex flex-wrap gap-2 small">
               <span class="badge rounded-pill badge-tech">React</span>
               <span class="badge rounded-pill badge-tech">Angular</span>
@@ -182,7 +237,7 @@
         <div class="col-md-4">
           <div class="card h-100 p-3">
             <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-diagram-3 fw-bold"></i><h3 class="h5 m-0">Backend</h3></div>
-            <p class="muted mb-2">RESTful APIs, authentication, and data modeling with relational databases.</p>
+            <p class="muted mb-2" data-i18n="skills.backend.desc">RESTful APIs, authentication, and data modeling with relational databases.</p>
             <div class="d-flex flex-wrap gap-2 small">
               <span class="badge rounded-pill badge-tech">Node</span>
               <span class="badge rounded-pill badge-tech">Java</span>
@@ -193,12 +248,12 @@
         </div>
         <div class="col-md-4">
           <div class="card h-100 p-3">
-            <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-people fw-bold"></i><h3 class="h5 m-0">UX & Research</h3></div>
-            <p class="muted mb-2">User‑centered design, prototyping, and HCI research applied to real products.</p>
+            <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-people fw-bold"></i><h3 class="h5 m-0" data-i18n="skills.ux.title">UX & Research</h3></div>
+            <p class="muted mb-2" data-i18n="skills.ux.desc">User‑centered design, prototyping, and HCI research applied to real products.</p>
             <div class="d-flex flex-wrap gap-2 small">
-              <span class="badge rounded-pill badge-tech">Usability</span>
-              <span class="badge rounded-pill badge-tech">Prototyping</span>
-              <span class="badge rounded-pill badge-tech">A/B Testing</span>
+              <span class="badge rounded-pill badge-tech" data-i18n="skills.ux.us">Usability</span>
+              <span class="badge rounded-pill badge-tech" data-i18n="skills.ux.pro">Prototyping</span>
+              <span class="badge rounded-pill badge-tech" data-i18n="skills.ux.test">A/B Testing</span>
             </div>
           </div>
         </div>
@@ -212,7 +267,7 @@
   <section id="gallery" class="section">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h3 fw-bold m-0">UI Gallery</h2>
+        <h2 class="h3 fw-bold m-0" data-i18n="gallery.title">UI Gallery</h2>
        <!-- <p class="muted m-0 small">Drop your Figma exports as images into <code>assets/</code> and update filenames below.</p>-->
       </div>
 
@@ -248,160 +303,236 @@
   <div class="divider"></div>
 
   <!-- Projects -->
-  <section id="projects" class="section">
-    <div class="container">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h3 fw-bold m-0">Projects</h2>
-        <div class="btn-group" role="group" aria-label="Project filters">
-          <button class="btn btn-sm btn-outline-light filter-btn active" data-filter="all">All</button>
-          <button class="btn btn-sm btn-outline-light filter-btn" data-filter="frontend">Frontend</button>
-          <button class="btn btn-sm btn-outline-light filter-btn" data-filter="backend">Backend</button>
-          <button class="btn btn-sm btn-outline-light filter-btn" data-filter="ux">UX</button>
-          <button class="btn btn-sm btn-outline-light filter-btn" data-filter="research">Research</button>
-        </div>
-      </div>
+  <!-- Projects -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="h3 fw-bold m-0" data-i18n="projects.title">Projects</h2>
 
-      <div class="row g-3" id="project-grid">
-        <!-- E‑commerce platform -->
-        <div class="col-md-6 project" data-tags="frontend backend">
-          <div class="card h-100 p-3">
-            <div class="card-body">
-              <h3 class="h5">E‑commerce Platform</h3>
-              <p class="muted">End‑to‑end app with React, Node.js, and PostgreSQL. Includes REST API for web, mobile, and desktop clients; CI with GitHub Actions.</p>
-              <div class="d-flex flex-wrap gap-2 small mb-3">
-                <span class="badge rounded-pill badge-tech">React</span>
-                <span class="badge rounded-pill badge-tech">Node</span>
-                <span class="badge rounded-pill badge-tech">PostgreSQL</span>
-                <span class="badge rounded-pill badge-tech">CI/CD</span>
-              </div>
-              <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noreferrer" class="btn btn-sm btn-outline-light">Source</a>
-            </div>
-          </div>
-        </div>
-        <!-- EXAVER module -->
-        <div class="col-md-6 project" data-tags="backend frontend">
-          <div class="card h-100 p-3">
-            <div class="card-body">
-              <h3 class="h5">EXAVER Exam Application Module</h3>
-              <p class="muted">Full module (frontend & backend) for managing exam applications, dynamic forms, assignments, and reports.</p>
-              <div class="d-flex flex-wrap gap-2 small mb-3">
-                <span class="badge rounded-pill badge-tech">CodeIgniter</span>
-                <span class="badge rounded-pill badge-tech">MySQL</span>
-                <span class="badge rounded-pill badge-tech">Bootstrap</span>
-              </div>
-              <a href="#" class="btn btn-sm btn-outline-light disabled" aria-disabled="true">Private</a>
-            </div>
-          </div>
-        </div>
-        <!-- Anonymous Info Website (Hackathon) -->
-        <div class="col-md-6 project" data-tags="frontend ux">
-          <div class="card h-100 p-3">
-            <div class="card-body">
-              <h3 class="h5">Anonymous Info Website (Hackathon)</h3>
-              <p class="muted">Competition project delivered in two days, focusing on anonymity, clarity, and rapid delivery.</p>
-              <div class="d-flex flex-wrap gap-2 small mb-3">
-                <span class="badge rounded-pill badge-tech">JS</span>
-                <span class="badge rounded-pill badge-tech">Bootstrap</span>
-                <span class="badge rounded-pill badge-tech">UX Writing</span>
-              </div>
-              <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noreferrer" class="btn btn-sm btn-outline-light">Sample Repo</a>
-            </div>
-          </div>
-        </div>
-        <!-- HCI Research with EEG -->
-        <div class="col-md-6 project" data-tags="research backend">
-          <div class="card h-100 p-3">
-            <div class="card-body">
-              <h3 class="h5">HCI Research: EEG for Learning Styles</h3>
-              <p class="muted">Research & ML in Python exploring EEG signals as features for online learning personalization.</p>
-              <div class="d-flex flex-wrap gap-2 small mb-3">
-                <span class="badge rounded-pill badge-tech">Python</span>
-                <span class="badge rounded-pill badge-tech">ML</span>
-                <span class="badge rounded-pill badge-tech">HCI</span>
-              </div>
-              <a href="#" class="btn btn-sm btn-outline-light disabled" aria-disabled="true">Publication</a>
-            </div>
-          </div>
-        </div>
+      <div class="btn-group" role="group" aria-label="Project filters">
+        <button class="btn btn-sm btn-outline-light filter-btn active" data-filter="all">
+          <span data-i18n="projects.filter.all">All</span>
+        </button>
+        <button class="btn btn-sm btn-outline-light filter-btn" data-filter="frontend">
+          <span data-i18n="projects.filter.frontend">Frontend</span>
+        </button>
+        <button class="btn btn-sm btn-outline-light filter-btn" data-filter="backend">
+          <span data-i18n="projects.filter.backend">Backend</span>
+        </button>
+        <button class="btn btn-sm btn-outline-light filter-btn" data-filter="ux">
+          <span data-i18n="projects.filter.ux">UX</span>
+        </button>
+        <button class="btn btn-sm btn-outline-light filter-btn" data-filter="research">
+          <span data-i18n="projects.filter.research">Research</span>
+        </button>
       </div>
-
-      <p class="muted mt-3">More on <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noreferrer">github.com/AridaiOrtegaZ</a>.</p>
     </div>
-  </section>
+
+    <div class="row g-3" id="project-grid">
+      <!-- E-commerce platform -->
+      <div class="col-md-6 project" data-tags="frontend backend">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <h3 class="h5" data-i18n="projects.p1.title">E-commerce Platform</h3>
+            <p class="muted" data-i18n="projects.p1.desc">
+              End-to-end app with React, Node.js, and PostgreSQL. Includes REST API for web, mobile, and desktop clients; CI with GitHub Actions.
+            </p>
+            <div class="d-flex flex-wrap gap-2 small mb-3">
+              <span class="badge rounded-pill badge-tech">React</span>
+              <span class="badge rounded-pill badge-tech">Node</span>
+              <span class="badge rounded-pill badge-tech">PostgreSQL</span>
+              <span class="badge rounded-pill badge-tech">CI/CD</span>
+            </div>
+            <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-light">
+              <span data-i18n="projects.p1.btn">Source</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAVER module -->
+      <div class="col-md-6 project" data-tags="backend frontend">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <h3 class="h5" data-i18n="projects.p2.title">EXAVER Exam Application Module</h3>
+            <p class="muted" data-i18n="projects.p2.desc">
+              Full module (frontend & backend) for managing exam applications, dynamic forms, assignments, and reports.
+            </p>
+            <div class="d-flex flex-wrap gap-2 small mb-3">
+              <span class="badge rounded-pill badge-tech">CodeIgniter</span>
+              <span class="badge rounded-pill badge-tech">MySQL</span>
+              <span class="badge rounded-pill badge-tech">Bootstrap</span>
+            </div>
+            <a href="#" class="btn btn-sm btn-outline-light disabled" aria-disabled="true">
+              <span data-i18n="projects.p2.btn">Private</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anonymous Info Website (Hackathon) -->
+      <div class="col-md-6 project" data-tags="frontend ux">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <h3 class="h5" data-i18n="projects.p3.title">Anonymous Info Website (Hackathon)</h3>
+            <p class="muted" data-i18n="projects.p3.desc">
+              Competition project delivered in two days, focusing on anonymity, clarity, and rapid delivery.
+            </p>
+            <div class="d-flex flex-wrap gap-2 small mb-3">
+              <span class="badge rounded-pill badge-tech">JS</span>
+              <span class="badge rounded-pill badge-tech">Bootstrap</span>
+              <span class="badge rounded-pill badge-tech"><span data-i18n="projects.badge.uxwriting">UX Writing</span></span>
+            </div>
+            <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-light">
+              <span data-i18n="projects.p3.btn">Sample Repo</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- HCI Research with EEG -->
+      <div class="col-md-6 project" data-tags="research backend">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <h3 class="h5" data-i18n="projects.p4.title">HCI Research: EEG for Learning Styles</h3>
+            <p class="muted" data-i18n="projects.p4.desc">
+              Research & ML in Python exploring EEG signals as features for online learning personalization.
+            </p>
+            <div class="d-flex flex-wrap gap-2 small mb-3">
+              <span class="badge rounded-pill badge-tech">Python</span>
+              <span class="badge rounded-pill badge-tech">ML</span>
+              <span class="badge rounded-pill badge-tech">HCI</span>
+            </div>
+            <a href="#" class="btn btn-sm btn-outline-light disabled" aria-disabled="true">
+              <span data-i18n="projects.p4.btn">Publication</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="muted mt-3">
+      <span data-i18n="projects.more">More on</span>
+      <a href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noopener noreferrer">github.com/AridaiOrtegaZ</a>.
+    </p>
+  </div>
+</section>
+
 
   <div class="divider"></div>
 
-  <!-- Experience -->
-  <section id="experience" class="section">
-    <div class="container">
-      <h2 class="h3 fw-bold mb-4">Experience</h2>
-      <div class="row g-3">
-        <div class="col-lg-6">
-          <div class="card p-3 h-100">
-            <div class="timeline">
-              <div class="t-item">
-                <h3 class="h6 m-0">UX/UI Developer – ND (Negocios Digitales)</h3>
-                <small class="muted">2025 · SIAF‑RP (Ministry of Economy & Finance, Peru)</small>
-                <p class="mt-2 muted">Turned requirements into accessible interfaces, aligning design and code to improve navigation, performance, and satisfaction.</p>
-              </div>
-              <div class="t-item">
-                <h3 class="h6 m-0">Freelance Developer</h3>
-                <small class="muted">2023–2025</small>
-                <p class="mt-2 muted">Built and shipped an e‑commerce platform, implemented REST APIs, and automated workflows with GitHub Actions.</p>
-              </div>
-              <div class="t-item">
-                <h3 class="h6 m-0">Practices – Facultad de Estadística e Informática</h3>
-                <small class="muted">2022–2023</small>
-                <p class="mt-2 muted">Automation tools for administrative processes across mobile and desktop, including AI components.</p>
-              </div>
+ <!-- Experience -->
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="h3 fw-bold mb-4" data-i18n="experience.title">Experience</h2>
+
+    <div class="row g-3">
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <div class="timeline">
+            <div class="t-item">
+              <h3 class="h6 m-0" data-i18n="experience.job1.title">
+                UX/UI Developer – ND (Negocios Digitales)
+              </h3>
+              <small class="muted" data-i18n="experience.job1.meta">
+                2025 · SIAF-RP (Ministry of Economy & Finance, Peru)
+              </small>
+              <p class="mt-2 muted" data-i18n="experience.job1.desc">
+                Turned requirements into accessible interfaces, aligning design and code to improve navigation, performance, and satisfaction.
+              </p>
+            </div>
+
+            <div class="t-item">
+              <h3 class="h6 m-0" data-i18n="experience.job2.title">Freelance Developer</h3>
+              <small class="muted" data-i18n="experience.job2.meta">2023–2025</small>
+              <p class="mt-2 muted" data-i18n="experience.job2.desc">
+                Built and shipped an e-commerce platform, implemented REST APIs, and automated workflows with GitHub Actions.
+              </p>
+            </div>
+
+            <div class="t-item">
+              <h3 class="h6 m-0" data-i18n="experience.job3.title">
+                Practices – Facultad de Estadística e Informática
+              </h3>
+              <small class="muted" data-i18n="experience.job3.meta">2022–2023</small>
+              <p class="mt-2 muted" data-i18n="experience.job3.desc">
+                Automation tools for administrative processes across mobile and desktop, including AI components.
+              </p>
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <div class="card p-3 h-100">
-            <h3 class="h5">Education & Certifications</h3>
-            <ul class="muted mb-0">
-              <li>Master's: User‑Centered Interactive Systems (2023–2025)</li>
-              <li>Bachelor's: Computer Technology (2019–2023)</li>
-              <li>TOEFL ITP & EXAVER English, Azure AZ‑900, GitHub Actions CI/CD</li>
-              <li>Hackathons: Coding4Integrity (São Paulo), ANIEI Mexico – 3rd place</li>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <h3 class="h5" data-i18n="experience.edu.title">Education & Certifications</h3>
+          <ul class="muted mb-0">
+            <li data-i18n="experience.edu.li1">Master's: User-Centered Interactive Systems (2023–2025)</li>
+            <li data-i18n="experience.edu.li2">Bachelor's: Computer Technology (2019–2023)</li>
+            <li data-i18n="experience.edu.li3">TOEFL ITP & EXAVER English, Azure AZ-900, GitHub Actions CI/CD</li>
+            <li data-i18n="experience.edu.li4">Hackathons: Coding4Integrity (São Paulo), ANIEI Mexico – 3rd place</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <div class="divider"></div>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-8">
+        <h2 class="h3 fw-bold" data-i18n="contact.title">Let's build something useful.</h2>
+
+        <p class="muted" data-i18n="contact.subtitle">
+          Open to collaboration on web apps, APIs, and UX-driven products.
+        </p>
+
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-brand" href="mailto:aridaiortega@hotmail.com">
+            <i class="bi bi-envelope"></i>
+            <span data-i18n="contact.btnEmail">Email</span>
+          </a>
+
+          <a class="btn btn-outline-light"
+             href="https://www.linkedin.com/in/aridai-ortega-46b840236/"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-linkedin"></i>
+            <span data-i18n="contact.btnLinkedin">LinkedIn</span>
+          </a>
+
+          <a class="btn btn-outline-light"
+             href="https://github.com/AridaiOrtegaZ"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-github"></i>
+            <span data-i18n="contact.btnGithub">GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3">
+          <div class="card-body">
+            <h3 class="h6" data-i18n="contact.factsTitle">Quick facts</h3>
+            <ul class="muted small mb-0">
+              <li data-i18n="contact.fact1">Based in Mexico City</li>
+              <li data-i18n="contact.fact2">Spanish / English</li>
+              <li data-i18n="contact.fact3">Available for remote or on-site work</li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <div class="divider"></div>
-
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="row g-3 align-items-center">
-        <div class="col-md-8">
-          <h2 class="h3 fw-bold">Let's build something useful.</h2>
-          <p class="muted">Open to collaboration on web apps, APIs, and UX‑driven products.</p>
-          <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-brand" href="mailto:aridaiortega@hotmail.com"><i class="bi bi-envelope"></i> Email</a>
-            <a class="btn btn-outline-light" href="https://www.linkedin.com/in/aridaiortega-46b840236" target="_blank" rel="noreferrer"><i class="bi bi-linkedin"></i> LinkedIn</a>
-            <a class="btn btn-outline-light" href="https://github.com/AridaiOrtegaZ" target="_blank" rel="noreferrer"><i class="bi bi-github"></i> GitHub</a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card p-3">
-            <div class="card-body">
-              <h3 class="h6">Quick facts</h3>
-              <ul class="muted small mb-0">
-                <li>Based in Mexico City</li>
-                <li>Spanish / English</li>
-                <li>Available for remote or on‑site work</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <footer class="py-4 border-top border-opacity-10 border-light">
     <div class="container d-flex flex-wrap justify-content-between align-items-center">
@@ -412,6 +543,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    
     // Current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -460,6 +592,222 @@
         if (el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
       });
     });
+
+    // -------- i18n (EN/ES) --------
+const i18n = {
+  en: {
+    "hero.title": "Developer focused on clean code, accessible UIs, and robust services.",
+  "hero.subtitle": "I build web applications end-to-end: API design, databases, and responsive interfaces with a keen eye for usability.",
+  "hero.ctaProjects": "View Projects",
+  "hero.ctaGithub": "GitHub",
+  "hero.ctaLinkedin": "LinkedIn",
+  "hero.ctaCv": "Download CV",
+  "hero.meta": "Mexico City · English (Advanced) · Spanish (Native)",
+    "nav.about": "About",
+    "nav.skills": "Skills",
+    "nav.gallery": "UI Gallery",
+    "nav.projects": "Projects",
+    "nav.experience": "Experience",
+    "nav.contact": "Contact",
+
+  "about.description": "Bachelor's in Computer Technology and a master's in user-centered interactive systems. I enjoy turning requirements into reliable software and intuitive experiences.",
+  "about.li1": "Design to deployment: Git, CI/CD with GitHub Actions, Docker basics.",
+  "about.li2": "Solid grounding in HCI, usability, and technical documentation.",
+  "about.li3": "Comfortable across frontend, backend, and database integration.",
+  "about.toolsTitle": "Core tools",
+
+    "about.title": "About",
+    "skills.title": "Selected Skills",
+    "skills.frontend.desc": "Responsive, accessible interfaces with Bootstrap and modern JS frameworks.",
+      "skills.backend.desc": "RESTful APIs, authentication, and data modeling with relational databases.",
+  "skills.ux.title": "UX & Research",
+  "skills.ux.desc": "User-centered design, prototyping, and HCI research applied to real products.",
+
+    "nav.gallery": "UI Gallery",
+    "projects.title": "Projects",
+    "projects.filter.all": "All",
+  "projects.filter.frontend": "Frontend",
+  "projects.filter.backend": "Backend",
+  "projects.filter.ux": "UX",
+  "projects.filter.research": "Research",
+
+  "projects.p1.title": "E-commerce Platform",
+  "projects.p1.desc": "End-to-end app with React, Node.js, and PostgreSQL. Includes REST API for web, mobile, and desktop clients; CI with GitHub Actions.",
+  "projects.p1.btn": "Source",
+
+  "projects.p2.title": "EXAVER Exam Application Module",
+  "projects.p2.desc": "Full module (frontend & backend) for managing exam applications, dynamic forms, assignments, and reports.",
+  "projects.p2.btn": "Private",
+
+  "projects.p3.title": "Anonymous Info Website (Hackathon)",
+  "projects.p3.desc": "Competition project delivered in two days, focusing on anonymity, clarity, and rapid delivery.",
+  "projects.p3.btn": "Sample Repo",
+
+  "projects.p4.title": "HCI Research: EEG for Learning Styles",
+  "projects.p4.desc": "Research & ML in Python exploring EEG signals as features for online learning personalization.",
+  "projects.p4.btn": "Publication",
+
+  "projects.badge.uxwriting": "UX Writing",
+  "projects.more": "More on",
+    "experience.title": "Experience",
+    "experience.job1.title": "UX/UI Developer – ND (Negocios Digitales)",
+  "experience.job1.meta": "2025 · SIAF-RP (Ministry of Economy & Finance, Peru)",
+  "experience.job1.desc": "Turned requirements into accessible interfaces, aligning design and code to improve navigation, performance, and satisfaction.",
+
+  "experience.job2.title": "Freelance Developer",
+  "experience.job2.meta": "2023–2025",
+  "experience.job2.desc": "Built and shipped an e-commerce platform, implemented REST APIs, and automated workflows with GitHub Actions.",
+
+  "experience.job3.title": "Practices – Facultad de Estadística e Informática",
+  "experience.job3.meta": "2022–2023",
+  "experience.job3.desc": "Automation tools for administrative processes across mobile and desktop, including AI components.",
+
+  "experience.edu.title": "Education & Certifications",
+  "experience.edu.li1": "Master's: User-Centered Interactive Systems (2023–2025)",
+  "experience.edu.li2": "Bachelor's: Computer Technology (2019–2023)",
+  "experience.edu.li3": "TOEFL ITP & EXAVER English, Azure AZ-900, GitHub Actions CI/CD",
+  "experience.edu.li4": "Hackathons: Coding4Integrity (São Paulo), ANIEI Mexico – 3rd place", 
+    "contact.title": "Let's build something useful.",
+    "contact.subtitle": "Open to collaboration on web apps, APIs, and UX-driven products.",
+  "contact.btnEmail": "Email",
+  "contact.btnLinkedin": "LinkedIn",
+  "contact.btnGithub": "GitHub",
+  "contact.factsTitle": "Quick facts",
+  "contact.fact1": "Based in Mexico City",
+  "contact.fact2": "Spanish / English",
+  "contact.fact3": "Available for remote or on-site work",
+
+    "hero.ctaProjects": "View Projects",
+    "hero.ctaCv": "Download CV",
+    "skills.ux.us": "Usability",
+  "skills.ux.pro": "Prototyping",
+  "skills.ux.test": "A/B Testing"
+  },
+  es: {
+    "hero.title": "Desarrolladora enfocada en código limpio, interfaces accesibles y servicios robustos.",
+  "hero.subtitle": "Desarrollo aplicaciones web de punta a punta: diseño de APIs, bases de datos e interfaces responsivas con enfoque en usabilidad.",
+  "hero.ctaProjects": "Ver proyectos",
+  "hero.ctaGithub": "GitHub",
+  "hero.ctaLinkedin": "LinkedIn",
+  "hero.ctaCv": "Descargar CV",
+  "hero.meta": "Ciudad de México · Inglés (Avanzado) · Español (Nativo)",
+    "nav.about": "Sobre mí",
+    "nav.skills": "Habilidades",
+    "nav.gallery": "Galería UI",
+    "nav.projects": "Proyectos",
+    "nav.experience": "Experiencia",
+    "nav.contact": "Contacto",
+
+    "about.title": "Sobre mí",
+  "about.description": "Licenciatura en Tecnologías Computacionales y maestría en sistemas interactivos centrados en el usuario. Disfruto transformar requerimientos en software confiable y experiencias intuitivas.",
+  "about.li1": "Del diseño al despliegue: Git, CI/CD con GitHub Actions y fundamentos de Docker.",
+  "about.li2": "Sólida base en HCI, usabilidad y documentación técnica.",
+  "about.li3": "Experiencia tanto en frontend como backend e integración con bases de datos.",
+  "about.toolsTitle": "Herramientas principales",
+
+    "skills.title": "Habilidades destacadas",
+      "skills.frontend.desc": "Interfaces responsivas y accesibles con Bootstrap y frameworks modernos de JavaScript.",
+  "skills.backend.desc": "APIs REST, autenticación y modelado de datos con bases de datos relacionales.",
+"skills.ux.title": "UX e Investigación",
+  "skills.ux.desc": "Diseño centrado en el usuario, prototipado e investigación HCI aplicada a productos reales.",
+
+    "projects.title": "Proyectos",
+    "projects.filter.all": "Todos",
+  "projects.filter.frontend": "Frontend",
+  "projects.filter.backend": "Backend",
+  "projects.filter.ux": "UX",
+  "projects.filter.research": "Investigación",
+
+  "projects.p1.title": "Plataforma de E-commerce",
+  "projects.p1.desc": "Aplicación de punta a punta con React, Node.js y PostgreSQL. Incluye API REST para clientes web, móvil y escritorio; CI con GitHub Actions.",
+  "projects.p1.btn": "Código",
+
+  "projects.p2.title": "Módulo de Solicitudes de Examen (EXAVER)",
+  "projects.p2.desc": "Módulo completo (frontend y backend) para gestionar solicitudes de examen, formularios dinámicos, asignaciones y reportes.",
+  "projects.p2.btn": "Privado",
+
+  "projects.p3.title": "Sitio de Información Anónima (Hackathon)",
+  "projects.p3.desc": "Proyecto de competencia entregado en dos días, enfocado en anonimato, claridad y entrega rápida.",
+  "projects.p3.btn": "Repositorio",
+
+  "projects.p4.title": "Investigación HCI: EEG para Estilos de Aprendizaje",
+  "projects.p4.desc": "Investigación y ML en Python explorando señales EEG como variables para personalización del aprendizaje en línea.",
+  "projects.p4.btn": "Publicación",
+
+  "projects.badge.uxwriting": "Redacción UX",
+  "projects.more": "Más en",
+    "gallery.title": "Galería UI",
+    "experience.title": "Experiencia",
+    "experience.job1.title": "Desarrolladora UX/UI – ND (Negocios Digitales)",
+  "experience.job1.meta": "2025 · SIAF-RP (Ministerio de Economía y Finanzas, Perú)",
+  "experience.job1.desc": "Convertí requerimientos en interfaces accesibles, alineando diseño y código para mejorar navegación, rendimiento y satisfacción.",
+
+  "experience.job2.title": "Desarrolladora Freelance",
+  "experience.job2.meta": "2023–2025",
+  "experience.job2.desc": "Desarrollé y publiqué una plataforma de e-commerce, implementé APIs REST y automaticé flujos de trabajo con GitHub Actions.",
+
+  "experience.job3.title": "Prácticas – Facultad de Estadística e Informática",
+  "experience.job3.meta": "2022–2023",
+  "experience.job3.desc": "Herramientas de automatización para procesos administrativos en móvil y escritorio, incluyendo componentes de IA.",
+
+  "experience.edu.title": "Educación y certificaciones",
+  "experience.edu.li1": "Maestría: Sistemas interactivos centrados en el usuario (2023–2025)",
+  "experience.edu.li2": "Licenciatura: Tecnología Computacional (2019–2023)",
+  "experience.edu.li3": "TOEFL ITP y EXAVER English, Azure AZ-900, GitHub Actions CI/CD",
+  "experience.edu.li4": "Hackathons: Coding4Integrity (São Paulo), ANIEI México – 3er lugar",
+    "contact.title": "Construyamos algo útil.",
+    "contact.subtitle": "Abierta a colaborar en aplicaciones web, APIs y productos con enfoque en UX.",
+  "contact.btnEmail": "Correo",
+  "contact.btnLinkedin": "LinkedIn",
+  "contact.btnGithub": "GitHub",
+  "contact.factsTitle": "Datos rápidos",
+  "contact.fact1": "Ubicada en Ciudad de México",
+  "contact.fact2": "Español / Inglés",
+  "contact.fact3": "Disponible para trabajo remoto o presencial",
+
+    "hero.ctaProjects": "Ver proyectos",
+    "hero.ctaCv": "Descargar CV",
+    "skills.ux.us": "Usabilidad",
+  "skills.ux.pro": "Prototipado",
+  "skills.ux.test": "Pruebas A/B"
+  }
+};
+
+function applyLang(lang){
+  document.documentElement.setAttribute("lang", lang);
+  localStorage.setItem("lang", lang);
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const value = i18n[lang]?.[key];
+    
+    if (value) el.innerHTML = value; // usa innerHTML para respetar iconos si los incluyes en el texto
+  });
+
+    // CV link according to language
+  const cvBtn = document.getElementById("cvBtn");
+  if (cvBtn){
+    const file = (lang === "es") ? "assets/CV_AridaiOrtega_Esp.pdf" : "assets/CV_AridaiOrtega_ENG (2).pdf";
+    cvBtn.setAttribute("href", file);
+    cvBtn.setAttribute("download", file.split("/").pop());
+  }
+
+
+  const langBtn = document.getElementById("langToggle");
+  if (langBtn) langBtn.textContent = (lang === "es") ? "EN" : "ES";
+}
+
+const langBtn = document.getElementById("langToggle");
+const savedLang = localStorage.getItem("lang") || "en";
+applyLang(savedLang);
+
+if (langBtn){
+  langBtn.addEventListener("click", () => {
+    const current = localStorage.getItem("lang") || "en";
+    applyLang(current === "en" ? "es" : "en");
+  });
+}
+
   </script>
 </body>
 </html>
